@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\API"
   ],
-  "SelectedNode": "\\ecomnet.sln",
+  "SelectedNode": "\\API\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }
