@@ -18,6 +18,8 @@
     ]
   },
   "angularCompilerOptions": {
+    // "strictTemplates": true, bunları eklemeden çalışmıştı bölüm 9 ders 97 dk 6:00
+    // "strictDomEventTypes": false, bunları eklemeden çalışmıştı bölüm 9 ders 97 6:00
     "enableI18nLegacyMessageIdFormat": false
   }
 }
