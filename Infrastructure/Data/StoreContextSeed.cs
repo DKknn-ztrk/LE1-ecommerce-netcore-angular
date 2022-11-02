@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data
@@ -57,6 +58,28 @@ namespace Infrastructure.Data
                         context.Products.Add(item);
                     }
 
+                    await context.SaveChangesAsync();
+                }
+
+                // Eğer bizim Veritabanımızın içerisinde DeliveryMethods içeren bir tablo yok ise
+                // Bu tabloyu bizim belirlediğimiz kurala göre oluştur
+                if (!context.DeliveryMethods.Any())
+                {
+                    // Oluşturmasını istediğimiz tabloları içeren dosya
+                    var dmData =
+                        File.ReadAllText("../Infrastructure/Data/SeedData/delivery.json");
+
+                    // Oluşturmasını istediğimiz tabloları içeren dosya'yı JsonSerializer ile okutuyoruz
+                    var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
+
+                    // Dosyadan gelen verileri foreach ile dönüp veritabanı değişkenimize attık
+                    foreach (var item in methods)
+                    {
+                        // Dosyadan gelen verileri foreach ile dönüp veritabanı değişkenimize attık
+                        context.DeliveryMethods.Add(item);
+                    }
+
+                    // İşlem gerçekleştikten sonra değişiklikleri Veritabanımıza senkron edip kaydediyoruz
                     await context.SaveChangesAsync();
                 }
             }
