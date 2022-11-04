@@ -43,7 +43,8 @@ namespace API.Controllers
 
             var orders = await _orderService.GetOrdersForUserAsync(email);
 
-            return Ok(_mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(orders));
+            return Ok(_mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(orders)); // OrderToReturnDto şartlarından dolayı veritabanındaki nesneler uyuşmuyor ve hata fırlatıyor
+            // return Ok(_mapper.Map<IReadOnlyList<Order>>(orders)); // şuan kuralsız veritabanından ne gelirse gelsin diyoruz
         }
 
         [HttpGet("{id}")]
